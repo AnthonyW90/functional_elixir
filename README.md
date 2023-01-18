@@ -5,3 +5,4 @@ Documenting my notes for learning Elixir through "Almeida Functional Programming
 ## Sections
 
 - [Working with Variables and Functions](./variables_and_functions/)
+- [Pattern Matching](./pattern_matching/)
