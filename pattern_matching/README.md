@@ -254,3 +254,101 @@ iex> NumberCompare.greater(1, 2)
 iex> NumberCompare.greater(2, 1)
 2
 ```
+
+Guard Clauses can be used to create better function signatures. For example, we can use guard clauses to check whether the arguments are numbers.
+
+[/lib/guard_clauses/checkout.ex](./lib/guard_clauses/checkout.ex)
+```elixir
+defmodule Checkout do
+  def total_cost(price, tax_rate) when price >= 0 and tax_rate >= 0 do
+    price * (1 + tax_rate)
+  end
+end
+```
+> `price >= 0` and `tax_rate >= 0` are guard clauses. They are used to check whether the arguments are greater than or equal to zero.
+
+```elixir
+iex> Checkout.total_cost(10, 0.1)
+11.0
+iex> Checkout.total_cost(-10, 0.1)
+** (FunctionClauseError) no function clause matching in Checkout.total_cost/2
+```
+
+## Control Flow
+
+### Case
+
+Case is used to match a value against a series of patterns. If a pattern matches, the corresponding expression is evaluated.
+
+```elixir
+case value do
+  pattern1 -> expression1
+  pattern2 -> expression2
+  pattern3 -> expression3
+  ...
+end
+```
+
+```elixir
+iex> case :ok do
+...>   :ok -> "It's ok"
+...>   :error -> "An error has occurred"
+...> end
+"It's ok"
+```
+
+### Cond
+
+Cond is used to evaluate a series of expressions. If an expression evaluates to true, the corresponding expression is evaluated.
+
+```elixir
+cond do
+  expression1 -> expression1
+  expression2 -> expression2
+  expression3 -> expression3
+  ...
+end
+```
+
+```elixir
+iex> cond do
+...>   1 + 1 == 3 -> "This will not be true"
+...>   2 * 5 == 12 -> "Nor this"
+...>   1 + 2 == 3 -> "But this will"
+...> end
+"But this will"
+```
+
+### If
+
+If is used to evaluate a single expression. If the expression evaluates to true, the corresponding expression is evaluated.
+
+```elixir
+if expression do
+  expression
+end
+```
+
+```elixir
+iex> if true do
+...>   "This will be true"
+...> end
+"This will be true"
+```
+
+### Unless
+
+Unless is used to evaluate a single expression. If the expression evaluates to false, the corresponding expression is evaluated.
+
+```elixir
+unless expression do
+  expression
+end
+```
+
+```elixir
+iex> unless false do
+...>   "This will be true"
+...> end
+"This will be true"
+```
